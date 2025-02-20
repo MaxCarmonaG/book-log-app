@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "description": "Track books you've read, rate them, and organize by genre or author.",
   "type": "module",
+  "source": "index.html",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build --dist-dir docs --public-url /book-log-app/ index.html",
-    "dev:build": "parcel build --dist-dir dist --no-content-hash index.html",
-    "dev:run": "npm run dev:build && npm run dev:start",
-    "dev:start": "parcel serve --dist-dir dist index.html",
+    "start": "parcel",
+    "build": "parcel build --dist-dir dist --public-url /book-log-app/",
     "lint": "eslint .",
     "test": "vitest"
   },
