@@ -37,6 +37,9 @@ jobs:
             npm run build
           fi
 
+      - name: Check build output
+        run: ls -la dist/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
