@@ -6,11 +6,11 @@ A book logger app is an application that serves as a personal reading journal wh
 
 ## Clone and Getting Started
 
-    git clone https://github.com/MaxCarmonaG/book-log-app
+    git clone https://github.com/MaxCarmonaG/book-log-app.git
     cd book-log-app
     npm install
     npm run dev:start
 
 ## Build status
 
-The project is ready and running and you can visit us here
+The project is ready and running and you can visit us here [https://maxcarmonag.github.io/book-log-app/](https://maxcarmonag.github.io/book-log-app/)
