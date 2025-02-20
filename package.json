@@ -6,7 +6,7 @@
   "source": "index.html",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build --dist-dir dist --public-url /book-log-app/",
+    "build": "parcel build --dist-dir dist",
     "lint": "eslint .",
     "test": "vitest"
   },
