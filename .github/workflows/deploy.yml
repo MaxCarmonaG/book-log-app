@@ -40,8 +40,8 @@ jobs:
       - name: Check build output
         run: ls -la dist/
 
-      - name: Check build output
-        run: ls -la book-log-app/
+      - name: Print Current Directory
+        run: pwd
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
