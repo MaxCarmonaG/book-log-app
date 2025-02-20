@@ -1,0 +1,38 @@
+{
+  "name": "book-log",
+  "version": "1.0.0",
+  "description": "Track books you've read, rate them, and organize by genre or author.",
+  "type": "module",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build --dist-dir docs --public-url /CheckList/ index.html",
+    "dev:build": "parcel build --dist-dir dist --no-content-hash index.html",
+    "dev:run": "npm run dev:build && npm run dev:start",
+    "dev:start": "parcel serve --dist-dir dist index.html",
+    "lint": "eslint .",
+    "test": "vitest"
+  },
+  "author": "Max Carmona",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^11.3.1",
+    "firebase-admin": "^13.1.0",
+    "gh-pages": "^6.3.0",
+    "parcel": "^2.13.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@testing-library/dom": "^10.4.0",
+    "buffer": "^6.0.3",
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.6.0",
+    "eslint-plugin-vitest": "^0.5.4",
+    "globals": "^15.15.0",
+    "jsdom": "^26.0.0",
+    "process": "^0.11.10",
+    "vitest": "^3.0.6"
+  }
+}
