@@ -155,13 +155,21 @@ body {
   background-color: var(--color-danger);
 }
 
+.btn#sign-in-button {
+  align-self: center;
+}
+
 /* Logger Styles */
 
-#logger {
+.logger__grid {
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
   gap: 1rem;
+}
+
+.logger__empty {
+  text-align: center;
 }
 
 .book-card {
@@ -235,7 +243,7 @@ body {
     max-width: 960px;
   }
 
-  #logger {
+  .logger__grid {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -246,7 +254,7 @@ body {
     padding: unset;
   }
 
-  #logger {
+  .logger__grid {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }

@@ -1,10 +1,24 @@
-import { booksObserver, deleteBook, editBook, saveBook } from "./lib/firebase";
+import {
+  authObserver,
+  booksObserver,
+  deleteBook,
+  editBook,
+  saveBook,
+  signInWithGoogle,
+  signOut,
+} from "./lib/firebase";
 import { bookCardTemplate, sanitizeInput } from "./lib/utils";
+import {
+  checkBiometricSupport,
+  registerBiometric,
+  verifyBiometric,
+} from "./lib/biometrics";
 
 let data = [];
 
 const inputIds = ["id", "title", "author", "genre", "rate"];
 const form = document.getElementById("form-record");
+const signInButton = document.getElementById("sign-in-button");
 
 const orderBy = (by) => {
   const sorted = data.sort((a, b) => {
@@ -39,8 +53,15 @@ const addControlEvents = () => {
 const renderLogger = (books) => {
   data = [...books];
   const template = data.map((book) => bookCardTemplate(book)).join("");
-  document.getElementById("logger").innerHTML = template;
-  addControlEvents();
+  if (template) {
+    const block = /* html */ `<div class="logger__grid">${template}</div>`;
+    document.getElementById("logger").innerHTML = block;
+    addControlEvents();
+  } else {
+    document.getElementById(
+      "logger"
+    ).innerHTML = /* html */ `<h3 class="logger__empty">Your log is empty</h3>`;
+  }
 };
 
 const getInput = () =>
@@ -123,8 +144,52 @@ const handleReset = () => {
   document.querySelector("input[type=hidden]").removeAttribute("value");
 };
 
+const handleSignIn = async () => {
+  try {
+    const user = await signInWithGoogle();
+
+    if (!user) return launchToast("Error: sign in failed", "danger");
+
+    if (!localStorage.getItem("credentialId")) {
+      if (await checkBiometricSupport()) {
+        if (window.confirm("Do you want to set up biometric?")) {
+          await registerBiometric(user);
+        }
+      }
+    } else {
+      if (!(await verifyBiometric())) {
+        await handleSignOut();
+        launchToast("Error: Biometric verification failed", "danger");
+      }
+    }
+  } catch (e) {
+    console.error("Sign in failed:", e);
+  }
+};
+
+const handleSignOut = async () => {
+  await signOut();
+  data = [];
+};
+
+const authGuard = (isLoggedIn) => {
+  if (isLoggedIn) {
+    signInButton.innerText = "Sign Out";
+    signInButton.onclick = handleSignOut;
+    signInButton.classList.replace("btn--success", "btn--danger");
+    booksObserver(renderLogger);
+  } else {
+    signInButton.innerText = "Sign In";
+    signInButton.onclick = handleSignIn;
+    signInButton.classList.replace("btn--danger", "btn--success");
+    document.getElementById(
+      "logger"
+    ).innerHTML = /* html */ `<p class="logger__empty">Please Login first to display Books history</p>`;
+  }
+};
+
 const onInit = () => {
-  booksObserver(renderLogger);
+  authObserver(authGuard);
 };
 
 form.addEventListener(
