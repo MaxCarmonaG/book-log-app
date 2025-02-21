@@ -30,7 +30,8 @@ body {
 }
 
 *:focus {
-  outline: none;
+  outline-width: 2px;
+  outline-color: var(--color-focus);
   border-color: var(--color-focus);
 }
 
@@ -279,6 +280,10 @@ body {
   bottom: 1.5rem;
   right: 1.5rem;
   background-color: var(--color-gray);
+}
+
+.btn--chatbot:focus {
+  border-color: var(--color-focus);
 }
 
 .btn--chatbot img {
