@@ -98,6 +98,20 @@
         </div>
       </section>
       <div id="snackbar"></div>
+      <button class="btn--chatbot chatbot-trigger">
+        <img src="/assets/chat-dot.svg" />
+      </button>
+
+      <div id="chatbot-container" class="hidden">
+        <div id="chat-history"></div>
+        <input type="text" id="chat-input" />
+        <div class="form__control">
+          <button class="btn btn--success" id="send-btn">Send</button>
+          <button class="btn btn--danger chatbot-trigger" id="close-btn">
+            Close
+          </button>
+        </div>
+      </div>
     </main>
     <script type="module" src="script.js"></script>
   </body>

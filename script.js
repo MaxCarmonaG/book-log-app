@@ -13,12 +13,14 @@ import {
   registerBiometric,
   verifyBiometric,
 } from "./lib/biometrics";
+import { askChatBot } from "./lib/genAI";
 
 let data = [];
 
 const inputIds = ["id", "title", "author", "genre", "rate"];
 const form = document.getElementById("form-record");
 const signInButton = document.getElementById("sign-in-button");
+const chatInput = document.getElementById("chat-input");
 
 const orderBy = (by) => {
   const sorted = data.sort((a, b) => {
@@ -188,6 +190,29 @@ const authGuard = (isLoggedIn) => {
   }
 };
 
+const appendMessage = (message) => {
+  const history = document.createElement("div");
+  history.textContent = message;
+  history.className = "history";
+  document.getElementById("chat-history").appendChild(history);
+  chatInput.value = "";
+};
+
+const handleAskChatBot = async () => {
+  const prompt = chatInput.value.trim().toLowerCase();
+  if (prompt) {
+    const result = await askChatBot(prompt);
+    appendMessage(result.response.text());
+  } else {
+    appendMessage("Please enter a prompt");
+  }
+};
+
+const handleChatbotVisibility = () => {
+  const chatbot = document.getElementById("chatbot-container");
+  chatbot.classList.toggle("hidden");
+};
+
 const onInit = () => {
   authObserver(authGuard);
 };
@@ -208,5 +233,10 @@ form.addEventListener("reset", handleReset);
 document
   .getElementById("order")
   .addEventListener("change", (e) => orderBy(e.target.value));
+
+document.getElementById("send-btn").addEventListener("click", handleAskChatBot);
+document
+  .querySelectorAll(".chatbot-trigger")
+  .forEach((btn) => btn.addEventListener("click", handleChatbotVisibility));
 
 window.addEventListener("load", onInit);
