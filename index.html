@@ -98,13 +98,22 @@
         </div>
       </section>
       <div id="snackbar"></div>
-      <button class="btn--chatbot chatbot-trigger">
-        <img src="/assets/chat-dot.png" />
+      <button
+        class="btn--chatbot chatbot-trigger"
+        aria-label="Trigger chatbot"
+        value=""
+      >
+        <img src="/assets/chat-dot.png" alt="Chatbot icon" />
       </button>
 
       <div id="chatbot-container" class="hidden">
         <div id="chat-history"></div>
-        <input type="text" id="chat-input" />
+        <input
+          type="text"
+          id="chat-input"
+          aria-label="Ask chatbot"
+          placeholder="Make me a question..."
+        />
         <div class="form__control">
           <button class="btn btn--success" id="send-btn">Send</button>
           <button class="btn btn--danger chatbot-trigger" id="close-btn">
